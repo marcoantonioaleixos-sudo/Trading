@@ -1,0 +1,2 @@
+# Trading
+diario de trading
