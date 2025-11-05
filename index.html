@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trading App</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <!-- Sidebar -->
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-header">
+      <h2>📊 Trading App</h2>
+      <button id="closeSidebar" class="close-btn">✖</button>
+    </div>
+
+    <nav class="menu">
+      <button class="menu-item" onclick="showTab('dashboard')">🏠 Panel Principal</button>
+
+      <div class="submenu">
+        <button class="menu-item has-sub" onclick="toggleSubmenu(this)">📈 Spot</button>
+        <div class="submenu-content">
+          <button onclick="showTab('spot-buy')">➕ Comprar</button>
+          <button onclick="showTab('spot-sell')">➖ Vender</button>
+        </div>
+      </div>
+
+      <div class="submenu">
+        <button class="menu-item has-sub" onclick="toggleSubmenu(this)">💸 Banca</button>
+        <div class="submenu-content">
+          <button onclick="showTab('deposit')">💰 Depositar</button>
+          <button onclick="showTab('withdraw')">🏦 Retirar</button>
+        </div>
+      </div>
+
+      <div class="submenu">
+        <button class="menu-item has-sub" onclick="toggleSubmenu(this)">💰 Earn</button>
+        <div class="submenu-content">
+          <button onclick="showTab('earn-open')">📥 Crear Earn</button>
+          <button onclick="showTab('earn-close')">📤 Cerrar Earn</button>
+        </div>
+      </div>
+
+      <div class="submenu">
+        <button class="menu-item has-sub" onclick="toggleSubmenu(this)">🤖 Grid Bot</button>
+        <div class="submenu-content">
+          <button onclick="showTab('grid-create')">⚙️ Crear Bot</button>
+          <button onclick="showTab('grid-close')">🛑 Cerrar Bot</button>
+        </div>
+      </div>
+
+      <button class="menu-item" onclick="showTab('charts')">📊 Gráficas y Detalles</button>
+      <button class="menu-item" onclick="showTab('settings')">⚙️ Configuración</button>
+    </nav>
+
+    <div class="section-switch">
+      <button class="switch-btn" onclick="switchSection()">🔁 Cambiar a Inversión Pasiva</button>
+    </div>
+  </aside>
+
+  <!-- Overlay -->
+  <div id="overlay" class="overlay"></div>
+
+  <!-- Main content -->
+  <div class="main">
+    <header>
+      <button id="menuButton" class="menu-btn">☰</button>
+      <h1 id="pageTitle">Panel Principal</h1>
+    </header>
+
+    <main id="content">
+      <section id="dashboard" class="tab active">
+        <h2>Resumen del Dashboard 🏠</h2>
+        <div class="card">
+          <p><strong>Balance Exchange 1:</strong> 2,500 USDT</p>
+          <p><strong>Balance Exchange 2:</strong> 2,350 USDT</p>
+        </div>
+      </section>
+
+      <section id="spot-buy" class="tab">
+        <h2>Comprar Spot</h2>
+        <p>Formulario para registrar una compra.</p>
+      </section>
+
+      <section id="spot-sell" class="tab">
+        <h2>Vender Spot</h2>
+        <p>Formulario para cerrar una operación.</p>
+      </section>
+
+      <!-- Resto de secciones vacías -->
+      <section id="deposit" class="tab"><h2>Depositar</h2></section>
+      <section id="withdraw" class="tab"><h2>Retirar</h2></section>
+      <section id="earn-open" class="tab"><h2>Crear Earn</h2></section>
+      <section id="earn-close" class="tab"><h2>Cerrar Earn</h2></section>
+      <section id="grid-create" class="tab"><h2>Crear Bot</h2></section>
+      <section id="grid-close" class="tab"><h2>Cerrar Bot</h2></section>
+      <section id="charts" class="tab"><h2>Gráficas y Detalles</h2></section>
+      <section id="settings" class="tab"><h2>Configuración</h2></section>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
