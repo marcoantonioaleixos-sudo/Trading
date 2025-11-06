@@ -1,18 +1,20 @@
-// netlify/functions/save_banca.js
-import { Pool } from "@neondatabase/serverless";
-
-const pool = new Pool({ connectionString: process.env.DATABASE_URL });
+import { Client } from 'pg';
 
 export async function handler(event) {
-  if (event.httpMethod !== "POST") {
-    return { statusCode: 405, body: "Method Not Allowed" };
+  if (event.httpMethod !== 'POST') {
+    return { statusCode: 405, body: 'Método no permitido' };
   }
 
   try {
-    const body = JSON.parse(event.body);
+    const data = JSON.parse(event.body);
 
-    // Generar ID si no viene dado
-    const id = body.id || "IDBAN" + Date.now();
+    // Conexión a tu base de datos Neon
+    const client = new Client({
+      connectionString: process.env.DATABASE_URL, // está en tus variables de entorno de Netlify
+      ssl: { rejectUnauthorized: false },
+    });
+
+    await client.connect();
 
     const query = `
       INSERT INTO banca (idbanca, fecha, tipo, medio, origen, destino, cantidad, activo, valorusdc, notas)
@@ -21,28 +23,33 @@ export async function handler(event) {
     `;
 
     const values = [
-      id,
-      body.fecha,
-      body.tipo,
-      body.medio || null,
-      body.origen || null,
-      body.destino || null,
-      body.cantidad || 0,
-      body.activo || null,
-      body.valorUSDC || 0,
-      body.notas || null,
+      data.id || 'IDBAN' + Date.now(),
+      data.fecha,
+      data.tipo,
+      data.medio,
+      data.origen,
+      data.destino,
+      data.cantidad,
+      data.activo,
+      data.valorusdc,
+      data.notas || '',
     ];
 
-    const result = await pool.query(query, values);
+    const result = await client.query(query, values);
+    await client.end();
+
     return {
       statusCode: 200,
-      body: JSON.stringify({ success: true, data: result.rows[0] }),
+      body: JSON.stringify({
+        success: true,
+        inserted: result.rows[0],
+      }),
     };
-  } catch (err) {
-    console.error("❌ Error en save_banca:", err);
+  } catch (error) {
+    console.error('❌ Error en save_banca:', error);
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: err.message }),
-    };
-  }
+      body: JSON.stringify({ error: error.message }),
+    };
+  }
 }
