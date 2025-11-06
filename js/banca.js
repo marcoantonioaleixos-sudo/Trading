@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let val = valorField.value.replace(/[^\d.]/g, "");
     if (val) {
       val = parseFloat(val).toFixed(6);
-      valorField.value = ${val} ₮;
+      valorField.value = "${val} ₮";
     }
   });
 
@@ -37,8 +37,9 @@ document.addEventListener("DOMContentLoaded", () => {
     registros.push(record);
     localStorage.setItem("banca_records", JSON.stringify(registros));
 
-    alert(✅ Registro ${tipo} guardado correctamente);
+    alert("✅ Registro ${tipo} guardado correctamente");
     form.reset();
     valorField.value = "";
   });
+
 });
