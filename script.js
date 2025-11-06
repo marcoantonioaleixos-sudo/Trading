@@ -1,4 +1,4 @@
-// ==== TOGGLE SIDEBAR ====
+// === SIDEBAR ===
 const sidebar = document.getElementById('sidebar');
 const overlay = document.getElementById('overlay');
 const menuButton = document.getElementById('menuButton');
@@ -19,37 +19,33 @@ overlay.addEventListener('click', () => {
   overlay.classList.remove('active');
 });
 
-// ==== SUBMENÚS ====
+// === SUBMENÚS ===
 function toggleSubmenu(button) {
   const submenu = button.nextElementSibling;
   submenu.classList.toggle('active');
 }
 
-// ==== CAMBIO DE PESTAÑAs ====
+// === CAMBIO DE PESTAÑAS ===
 function showTab(tabId) {
-  // Oculta todas las secciones
+  // Ocultar todas las pestañas
   document.querySelectorAll('.tab').forEach(tab => {
     tab.classList.remove('active');
   });
 
-  // Muestra la sección seleccionada
-  const activeTab = document.getElementById(tabId);
-  if (activeTab) {
-    activeTab.classList.add('active');
+  // Mostrar la pestaña seleccionada
+  const selectedTab = document.getElementById(tabId);
+  if (selectedTab) {
+    selectedTab.classList.add('active');
   }
 
-  // Cambia el título superior
-  const titleElement = activeTab.querySelector('h2');
-  if (titleElement) {
-    document.getElementById('pageTitle').textContent = titleElement.textContent;
+  // Cambiar el título superior
+  const pageTitle = document.getElementById('pageTitle');
+  const button = document.querySelector([onclick="showTab('${tabId}')"]);
+  if (button && pageTitle) {
+    pageTitle.textContent = button.textContent;
   }
 
-  // Cierra el menú si estás en móvil
+  // Cerrar menú lateral en pantallas pequeñas
   sidebar.classList.remove('open');
   overlay.classList.remove('active');
-}
-
-// ==== CAMBIAR SECCIÓN ====
-function switchSection() {
-  alert('🔁 En el futuro aquí cambiarás entre Trading e Inversión Pasiva.');
 }
