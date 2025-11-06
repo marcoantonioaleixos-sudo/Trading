@@ -1,7 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.querySelector("form");
   const tipo = document.body.dataset.tipo; // "Depositar" o "Retirar"
-
   const tipoField = document.getElementById("tipo");
   tipoField.value = tipo;
 
@@ -12,11 +11,11 @@ document.addEventListener("DOMContentLoaded", () => {
     let val = valorField.value.replace(/[^\d.]/g, "");
     if (val) {
       val = parseFloat(val).toFixed(6);
-      valorField.value = "${val} ₮";
+      valorField.value = ${val} ₮;
     }
   });
 
-  form.addEventListener("submit", (e) => {
+  form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
     const record = {
@@ -28,18 +27,31 @@ document.addEventListener("DOMContentLoaded", () => {
       destino: document.getElementById("destino").value,
       cantidad: document.getElementById("cantidad").value,
       activo: document.getElementById("activo").value,
-      valorUSDC: valorField.value,
+      valorUSDC: document.getElementById("valorUSDC").value.replace(" ₮", ""),
       notas: document.getElementById("notas").value,
     };
 
-    // Guardar localmente
-    const registros = JSON.parse(localStorage.getItem("banca_records") || "[]");
-    registros.push(record);
-    localStorage.setItem("banca_records", JSON.stringify(registros));
+    try {
+      const res = await fetch("/.netlify/functions/save_banca", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(record),
+      });
 
-    alert("✅ Registro ${tipo} guardado correctamente");
-    form.reset();
-    valorField.value = "";
-  });
+      const data = await res.json();
 
+      if (!res.ok) {
+        console.error("Error al guardar:", data);
+        alert("❌ Error al guardar en la base de datos");
+        return;
+      }
+
+      alert(✅ Registro ${tipo} guardado correctamente en la base de datos);
+      form.reset();
+      valorField.value = "";
+    } catch (err) {
+      console.error("Error:", err);
+      alert("⚠ Error de conexión con el servidor");
+    }
+  });
 });
