@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Trading App que no va</title>
+  <title>Trading App</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 
@@ -11,7 +11,7 @@
   <!-- Sidebar -->
   <aside id="sidebar" class="sidebar">
     <div class="sidebar-header">
-      <h2>📊 Trading App que no que no</h2>
+      <h2>📊 Tradeando</h2>
       <button id="closeSidebar" class="close-btn">✖</button>
     </div>
 
@@ -21,8 +21,8 @@
       <div class="submenu">
         <button class="menu-item has-sub" onclick="toggleSubmenu(this)">📈 Spot</button>
         <div class="submenu-content">
-          <button onclick="showTab('spot-buy')">➕ Comprar</button>
-          <button onclick="showTab('spot-sell')">➖ Vender</button>
+          <button onclick="window.location.href='spot-buy'">➕ Comprar</button>
+          <button onclick="window.location.href='spot-sell'">➖ Vender</button>
         </div>
       </div>
 
@@ -30,15 +30,15 @@
         <button class="menu-item has-sub" onclick="toggleSubmenu(this)">💸 Banca</button>
         <div class="submenu-content">
           <button onclick="window.location.href='deposit.html'">💰 Depositar</button>
-          <button onclick="showTab('withdraw')">🏦 Retirar</button>
+          <button onclick="window.location.href='withdraw'">🏦 Retirar</button>
         </div>
       </div>
 
       <div class="submenu">
         <button class="menu-item has-sub" onclick="toggleSubmenu(this)">💰 Earn</button>
         <div class="submenu-content">
-          <button onclick="showTab('earn-open')">📥 Crear Earn</button>
-          <button onclick="showTab('earn-close')">📤 Cerrar Earn</button>
+          <button onclick="window.location.href='earn-open'">📥 Crear Earn</button>
+          <button onclick="window.location.href='earn-close'">📤 Cerrar Earn</button>
         </div>
       </div>
 
@@ -103,4 +103,5 @@
   <script src="script.js"></script>
 </body>
 </html>
+
 
