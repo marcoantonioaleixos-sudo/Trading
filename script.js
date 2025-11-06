@@ -3,21 +3,12 @@ const sidebar = document.getElementById('sidebar');
 const overlay = document.getElementById('overlay');
 const menuButton = document.getElementById('menuButton');
 const closeSidebar = document.getElementById('closeSidebar');
+const tabs = document.querySelectorAll('.tab');
+const pageTitle = document.getElementById('pageTitle');
 
-menuButton.addEventListener('click', () => {
-  sidebar.classList.add('open');
-  overlay.classList.add('active');
-});
-
-closeSidebar.addEventListener('click', () => {
-  sidebar.classList.remove('open');
-  overlay.classList.remove('active');
-});
-
-overlay.addEventListener('click', () => {
-  sidebar.classList.remove('open');
-  overlay.classList.remove('active');
-});
+menuButton.addEventListener('click', openSidebar);
+closeSidebar.addEventListener('click', closeMenu);
+overlay.addEventListener('click', closeMenu);
 
 // === SUBMENÚS ===
 function toggleSubmenu(button) {
