@@ -1,48 +1,55 @@
+// ==== TOGGLE SIDEBAR ====
 const sidebar = document.getElementById('sidebar');
 const overlay = document.getElementById('overlay');
 const menuButton = document.getElementById('menuButton');
 const closeSidebar = document.getElementById('closeSidebar');
-const tabs = document.querySelectorAll('.tab');
-const pageTitle = document.getElementById('pageTitle');
 
-menuButton.addEventListener('click', openSidebar);
-closeSidebar.addEventListener('click', closeMenu);
-overlay.addEventListener('click', closeMenu);
-
-function openSidebar() {
+menuButton.addEventListener('click', () => {
   sidebar.classList.add('open');
-  overlay.classList.add('show');
-}
+  overlay.classList.add('active');
+});
 
-function closeMenu() {
+closeSidebar.addEventListener('click', () => {
   sidebar.classList.remove('open');
-  overlay.classList.remove('show');
-}
+  overlay.classList.remove('active');
+});
 
+overlay.addEventListener('click', () => {
+  sidebar.classList.remove('open');
+  overlay.classList.remove('active');
+});
+
+// ==== SUBMENÚS ====
 function toggleSubmenu(button) {
-  const submenu = button.parentElement;
-  submenu.classList.toggle('open');
+  const submenu = button.nextElementSibling;
+  submenu.classList.toggle('active');
 }
 
-function showTab(id) {
-  tabs.forEach(tab => tab.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  pageTitle.textContent = document.getElementById(id).querySelector('h2').textContent;
-  closeMenu();
-}
+// ==== CAMBIO DE PESTAÑAs ====
+function showTab(tabId) {
+  // Oculta todas las secciones
+  document.querySelectorAll('.tab').forEach(tab => {
+    tab.classList.remove('active');
+  });
 
-function switchSection() {
-  alert('🔁 Próximamente: Inversión Pasiva');
-}
-
-// Swipe open gesture
-let startX = 0;
-document.addEventListener('touchstart', (e) => {
-  startX = e.touches[0].clientX;
-});
-document.addEventListener('touchend', (e) => {
-  const endX = e.changedTouches[0].clientX;
-  if (startX < 30 && endX - startX > 50) {
-    openSidebar();
+  // Muestra la sección seleccionada
+  const activeTab = document.getElementById(tabId);
+  if (activeTab) {
+    activeTab.classList.add('active');
   }
-});
+
+  // Cambia el título superior
+  const titleElement = activeTab.querySelector('h2');
+  if (titleElement) {
+    document.getElementById('pageTitle').textContent = titleElement.textContent;
+  }
+
+  // Cierra el menú si estás en móvil
+  sidebar.classList.remove('open');
+  overlay.classList.remove('active');
+}
+
+// ==== CAMBIAR SECCIÓN ====
+function switchSection() {
+  alert('🔁 En el futuro aquí cambiarás entre Trading e Inversión Pasiva.');
+}
