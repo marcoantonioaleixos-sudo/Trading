@@ -184,3 +184,53 @@ h1 {
   height: 100%;
   z-index: 200;
 }
+
+/* === Submenús mejorados === */
+.submenu-content {
+  display: none;
+  flex-direction: column;
+  padding-left: 1rem;
+  border-left: 2px solid #3a3a3a;
+  margin-top: 4px;
+  transition: all 0.25s ease-in-out;
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+}
+
+.submenu-content.active {
+  display: flex;
+  opacity: 1;
+  max-height: 300px; /* ajusta según contenido */
+}
+
+.submenu-content button {
+  background: none;
+  border: none;
+  text-align: left;
+  padding: 6px 10px;
+  font-size: 0.95rem;
+  color: #ddd;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: background 0.2s;
+}
+
+.submenu-content button:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* === Transiciones suaves para todo el menú === */
+.sidebar {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.menu-item.has-sub::after {
+  content: "▾";
+  float: right;
+  transition: transform 0.3s ease;
+}
+
+.menu-item.has-sub.active::after {
+  transform: rotate(180deg);
+}

@@ -28,8 +28,18 @@ document.addEventListener("DOMContentLoaded", async () => {
         body: JSON.stringify({ idban, fecha, cantidad, tipo }),
       });
 
+      // Mostrar mensaje de éxito
+      const successMsg = document.createElement("div");
+      successMsg.textContent =" ✅ Registro del ${tipo} enviado correctamente";
+      successMsg.className = "success-msg";
+      document.body.appendChild(successMsg);
+
+      setTimeout(() => {
+      successMsg.classList.add("fade-out");
+      setTimeout(() => successMsg.remove(), 500);
+      }, 2000);
+
       if (response.ok) {
-        alert("${tipo} registrado correctamente.");
         form.reset();
       } else {
         const error = await response.text();
