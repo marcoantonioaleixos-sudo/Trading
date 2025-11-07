@@ -1,4 +1,4 @@
-
+// === MENU PRINCIPAL ===
 menuButton.addEventListener('click', () => {
   sidebar.classList.add('open');
   overlay.classList.add('active');
@@ -22,7 +22,6 @@ function toggleSubmenu(button) {
 
 // === CAMBIO DE PESTAÑAS ===
 function showTab(tabId) {
-  // Ocultar todas las pestañas
   document.querySelectorAll('.tab').forEach(tab => {
     tab.classList.remove('active');
   });
@@ -35,7 +34,7 @@ function showTab(tabId) {
 
   // Cambiar el título superior
   const pageTitle = document.getElementById('pageTitle');
-  const button = document.querySelector([onclick="showTab('${tabId}')"]);
+  const button = document.querySelector(`[onclick="showTab('${tabId}')"]`);
   if (button && pageTitle) {
     pageTitle.textContent = button.textContent;
   }
