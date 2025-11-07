@@ -36,7 +36,7 @@ function showTab(tabId) {
 
   // Cambiar el título superior
   const pageTitle = document.getElementById('pageTitle');
-  const button = document.querySelector([onclick="showTab('${tabId}')"]);
+  const button = document.querySelector(`[onclick="showTab('${tabId}')"]`);
   if (button && pageTitle) {
     pageTitle.textContent = button.textContent;
   }
