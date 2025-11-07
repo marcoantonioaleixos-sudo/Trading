@@ -6,8 +6,8 @@ async function setup() {
     values: ['Depositar', 'Retirar'],
   });
 
-  // ✅ Actualiza la tabla Banca para usar ese enum
-  await db.tables.update('Banca', {
+  // ✅ Actualiza la tabla movimientos para usar ese enum
+  await db.tables.update('movimientos', {
     columns: {
       tipo: {
         type: 'Enum',
@@ -17,7 +17,7 @@ async function setup() {
     },
   });
 
-  console.log('Enum "tipo_enum" creado y asignado al campo "tipo" de Banca.');
+  console.log('Enum "tipo_enum" creado y asignado al campo "tipo" de movimientos.');
 }
 
 setup().catch(console.error);

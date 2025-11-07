@@ -17,7 +17,7 @@ export async function handler(event) {
     await client.connect();
 
     const query = `
-      INSERT INTO banca (idbanca, fecha, tipo, medio, origen, destino, cantidad, activo, valorusdc, notas)
+      INSERT INTO movimientos (idmovimientos, fecha, tipo, medio, origen, destino, cantidad, activo, valorusdc, notas)
       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
       RETURNING *;
     `;
@@ -46,7 +46,7 @@ export async function handler(event) {
       }),
     };
   } catch (error) {
-    console.error('❌ Error en save_banca:', error);
+    console.error('❌ Error en save_movimientos:', error);
     return {
       statusCode: 500,
       body: JSON.stringify({ error: error.message }),

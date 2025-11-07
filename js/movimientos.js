@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", async () => {
-  const form = document.getElementById("banca-form");
+  const form = document.getElementById("movimientos-form");
   const tipo = document.body.dataset.tipo || "Depositar"; // Detecta tipo según la página
   const tipoField = document.getElementById("tipo");
   tipoField.value = tipo;
@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     // Llamada a tu función serverless (que guarda en Neon)
     try {
-      const response = await fetch("/.netlify/functions/banca", {
+      const response = await fetch("/.netlify/functions/movimientos", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ idban, fecha, cantidad, tipo }),
