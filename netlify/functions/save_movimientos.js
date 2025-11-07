@@ -1,55 +1,51 @@
-import { Client } from 'pg';
+// /netlify/functions/save-movimiento.js
+
+import { neon } from '@neondatabase/serverless';
 
 export async function handler(event) {
   if (event.httpMethod !== 'POST') {
-    return { statusCode: 405, body: 'Método no permitido' };
+    return { statusCode: 405, body: 'Method Not Allowed' };
   }
 
+  const sql = neon(process.env.DATABASE_URL);
+
   try {
-    const data = JSON.parse(event.body);
+    const body = JSON.parse(event.body);
 
-    // Conexión a tu base de datos Neon
-    const client = new Client({
-      connectionString: process.env.DATABASE_URL, // está en tus variables de entorno de Netlify
-      ssl: { rejectUnauthorized: false },
-    });
-
-    await client.connect();
-
-    const query = `
-      INSERT INTO movimientos (idmovimientos, fecha, tipo, medio, origen, destino, cantidad, activo, valorusdc, notas)
-      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
-      RETURNING *;
+    await sql`
+      INSERT INTO Movimientos (
+        fecha,
+        tipo,
+        origen,
+        destino,
+        medio,
+        cantidad,
+        activo,
+        valorUSDC,
+        notas
+      )
+      VALUES (
+        ${body.fecha},
+        ${body.tipo},
+        ${body.origen},
+        ${body.destino},
+        ${body.medio},
+        ${body.cantidad},
+        ${body.activo},
+        ${body.valorUSDC},
+        ${body.notas}
+      );
     `;
-
-    const values = [
-      data.id || 'IDBAN' + Date.now(),
-      data.fecha,
-      data.tipo,
-      data.medio,
-      data.origen,
-      data.destino,
-      data.cantidad,
-      data.activo,
-      data.valorusdc,
-      data.notas || '',
-    ];
-
-    const result = await client.query(query, values);
-    await client.end();
 
     return {
       statusCode: 200,
-      body: JSON.stringify({
-        success: true,
-        inserted: result.rows[0],
-      }),
+      body: JSON.stringify({ success: true }),
     };
-  } catch (error) {
-    console.error('❌ Error en save_movimientos:', error);
+  } catch (err) {
+    console.error('❌ Error al guardar movimiento:', err);
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: error.message }),
+      body: JSON.stringify({ error: err.message }),
     };
   }
 }

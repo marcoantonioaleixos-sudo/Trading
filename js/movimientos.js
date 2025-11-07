@@ -1,53 +1,56 @@
-document.addEventListener("DOMContentLoaded", async () => {
-  const form = document.getElementById("movimientos-form");
-  const tipo = document.body.dataset.tipo || "Depositar"; // Detecta tipo según la página
-  const tipoField = document.getElementById("tipo");
-  tipoField.value = tipo;
+document.addEventListener('DOMContentLoaded', () => {
+  const form = document.getElementById('depositForm');
 
-  // Muestra el tipo en pantalla si quieres
-  const tipoLabel = document.getElementById("tipo-label");
-  if (tipoLabel) tipoLabel.textContent = tipo;
-
-  form.addEventListener("submit", async (e) => {
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    const idban = document.getElementById("idban").value;
-    const fecha = document.getElementById("fecha").value;
-    const cantidad = parseFloat(document.getElementById("cantidad").value);
+    // Recogemos los valores directamente como texto
+    
+    const data = {
+      fecha: document.getElementById('fecha').value,
+      tipo: document.getElementById('tipo').value,
+      origen: document.getElementById('origen').value,     // nombre del banco
+      destino: document.getElementById('destino').value,   // nombre del banco
+      medio: document.getElementById('medio').value,       // tipo de medio (Transferencia, Bizum, etc.)
+      cantidad: parseFloat(document.getElementById('cantidad').value),
+      activo: document.getElementById('activo').value,     // BTC, USDT, etc.
+      valorUSDC: parseFloat(document.getElementById('valorUSDC').value || 0),
+      notas: document.getElementById('notas').value.trim(),
+    };
 
-    if (!idban || !fecha || isNaN(cantidad)) {
-      alert("Por favor, completa todos los campos correctamente.");
-      return;
-    }
-
-    // Llamada a tu función serverless (que guarda en Neon)
     try {
-      const response = await fetch("/.netlify/functions/movimientos", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ idban, fecha, cantidad, tipo }),
+      const res = await fetch('/.netlify/functions/save-movimiento', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
       });
 
-      // Mostrar mensaje de éxito
-      const successMsg = document.createElement("div");
-      successMsg.textContent =" ✅ Registro del ${tipo} enviado correctamente";
-      successMsg.className = "success-msg";
-      document.body.appendChild(successMsg);
+      const result = await res.json();
 
-      setTimeout(() => {
-      successMsg.classList.add("fade-out");
-      setTimeout(() => successMsg.remove(), 500);
-      }, 2000);
-
-      if (response.ok) {
+      if (result.success) {
+        mostrarConfirmacion("✅ Movimiento guardado correctamente");
         form.reset();
       } else {
-        const error = await response.text();
-        alert("Error al registrar: " + error);
+        mostrarConfirmacion("❌ Error al guardar el movimiento");
       }
-    } catch (error) {
-      console.error(error);
-      alert("Error de conexión con el servidor.");
-    }
-  });
+
+    } catch (err) {
+      console.error(err);
+      mostrarConfirmacion("⚠ No se pudo conectar al servidor");
+    }
+  });
 });
+
+
+// === Animación / mensaje temporal ===
+
+function mostrarConfirmacion(mensaje) {
+  const msg = document.createElement('div');
+  msg.textContent = mensaje;
+  msg.className = 'mensaje-confirmacion';
+  document.body.appendChild(msg);
+
+  setTimeout(() => msg.classList.add('visible'), 50);   // aparece suavemente
+  setTimeout(() => msg.classList.remove('visible'), 2500); // desaparece
+  setTimeout(() => msg.remove(), 3000);
+}
