@@ -11,7 +11,8 @@
   "workspace": {
     "packageJson": {
       "dependencies": [
-        "npm:pg@^8.16.3"
+        "npm:dotenv@^3.3.2",
+        "npm:pg@^8.11.3"
       ]
     }
   }
