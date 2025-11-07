@@ -1,0 +1,4 @@
+postgresql:
+//neondb_owner:npg_fXISr2OLvG9n
+@ep-snowy-frost-agse9m6u-pooler.c-2.eu-central-1.aws.neon.tech
+/neondb?channel_binding=require&sslmode=require
