@@ -1,0 +1,28 @@
+import { neon } from "@neondatabase/serverless";
+
+const sql = neon(process.env.DATABASE_URL);
+
+export async function handler(event) {
+  try {
+    const body = JSON.parse(event.body);
+
+    const { tipo, fecha, origen, destino, medio, monto, nota } = body;
+
+    if (!tipo || !fecha || !origen || !destino || !medio || !monto) {
+      return { statusCode: 400, body: "Faltan datos obligatorios." };
+    }
+
+    await sql`
+      INSERT INTO Movimientos (tipo, fecha, origen, destino, medio, monto, nota)
+      VALUES (${tipo}, ${fecha}, ${origen}, ${destino}, ${medio}, ${monto}, ${nota})
+    `;
+
+    return {
+      statusCode: 200,
+      body: JSON.stringify({ success: true, message: "Movimiento guardado correctamente" }),
+    };
+  } catch (error) {
+    console.error("Error al guardar movimiento:", error);
+    return { statusCode: 500, body: JSON.stringify({ error: error.message }) };
+  }
+}
