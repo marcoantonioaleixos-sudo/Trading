@@ -5,14 +5,14 @@
   "main": "index.js",
   "scripts": {
     "start": "netlify dev",
-    "build": "echo 'No build step needed'",
+    "build": "netlify build",
     "test": "echo 'No tests yet'"
   },
   "dependencies": {
     "pg": "^8.11.3",
-    "dotenv": "^16.4.5"
+    "dotenv": "^3.3.2"
   },
-  "devDependencies": {},
+  "engines": {"node": ">=18"},
   "author": "Marco Antonio Aleixos",
   "license": "MIT"
 }
