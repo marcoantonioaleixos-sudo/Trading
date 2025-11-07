@@ -41,4 +41,10 @@ document.addEventListener("DOMContentLoaded", () => {
     sidebar.classList.remove("open");
     overlay.classList.remove("show");
 };
+
+// === SUBMENÚS ===
+function toggleSubmenu(button) {
+  const submenu = button.nextElementSibling;
+  submenu.classList.toggle("active");
+}
 });
