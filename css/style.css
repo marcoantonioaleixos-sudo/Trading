@@ -98,7 +98,12 @@ h1 {
 .submenu-content {
   display: none;
   flex-direction: column;
+  padding-left: 1rem;
   background: #0d1117;
+}
+
+.submenu-content.active {
+  display: flex;
 }
 
 .submenu.open .submenu-content {
