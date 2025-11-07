@@ -1,57 +1,43 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const form = document.querySelector("form");
-  const tipo = document.body.dataset.tipo; // "Depositar" o "Retirar"
+document.addEventListener("DOMContentLoaded", async () => {
+  const form = document.getElementById("banca-form");
+  const tipo = document.body.dataset.tipo || "Depositar"; // Detecta tipo según la página
   const tipoField = document.getElementById("tipo");
   tipoField.value = tipo;
 
-  const valorField = document.getElementById("valorUSDC");
-
-  // Formato numérico ₮ con 6 decimales
-  valorField.addEventListener("input", () => {
-    let val = valorField.value.replace(/[^\d.]/g, "");
-    if (val) {
-      val = parseFloat(val).toFixed(6);
-      valorField.value = ${val} ₮;
-    }
-  });
+  // Muestra el tipo en pantalla si quieres
+  const tipoLabel = document.getElementById("tipo-label");
+  if (tipoLabel) tipoLabel.textContent = tipo;
 
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
-    const record = {
-      id: "IDBAN" + Date.now(),
-      fecha: document.getElementById("fecha").value,
-      tipo: tipoField.value,
-      medio: document.getElementById("medio").value,
-      origen: document.getElementById("origen").value,
-      destino: document.getElementById("destino").value,
-      cantidad: document.getElementById("cantidad").value,
-      activo: document.getElementById("activo").value,
-      valorUSDC: document.getElementById("valorUSDC").value.replace(" ₮", ""),
-      notas: document.getElementById("notas").value,
-    };
+    const idban = document.getElementById("idban").value;
+    const fecha = document.getElementById("fecha").value;
+    const cantidad = parseFloat(document.getElementById("cantidad").value);
 
+    if (!idban || !fecha || isNaN(cantidad)) {
+      alert("Por favor, completa todos los campos correctamente.");
+      return;
+    }
+
+    // Llamada a tu función serverless (que guarda en Neon)
     try {
-      const res = await fetch("/.netlify/functions/save_banca", {
+      const response = await fetch("/.netlify/functions/banca", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(record),
+        body: JSON.stringify({ idban, fecha, cantidad, tipo }),
       });
 
-      const data = await res.json();
-
-      if (!res.ok) {
-        console.error("Error al guardar:", data);
-        alert("❌ Error al guardar en la base de datos");
-        return;
+      if (response.ok) {
+        alert("${tipo} registrado correctamente.");
+        form.reset();
+      } else {
+        const error = await response.text();
+        alert("Error al registrar: " + error);
       }
-
-      alert(✅ Registro ${tipo} guardado correctamente en la base de datos);
-      form.reset();
-      valorField.value = "";
-    } catch (err) {
-      console.error("Error:", err);
-      alert("⚠ Error de conexión con el servidor");
-    }
-  });
+    } catch (error) {
+      console.error(error);
+      alert("Error de conexión con el servidor.");
+    }
+  });
 });
