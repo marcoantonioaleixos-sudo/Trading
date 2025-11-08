@@ -6,10 +6,10 @@ const sql = neon();
 
 export async function handler() {
   try {
-    const rows = await sql`SELECT nombre FROM "Config_Bancos" ORDER BY nombre`;
+    const result = await sql`SELECT nombre FROM "Config_Bancos" ORDER BY nombre`;
     return {
       statusCode: 200,
-      body: JSON.stringify(rows),
+      body: JSON.stringify(result),
     };
   } catch (err) {
     console.error("Error en get-Config_Bancos:", err);
