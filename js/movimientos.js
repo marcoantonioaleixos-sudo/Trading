@@ -4,7 +4,7 @@
 
 async function fetchData(tabla) {
   try {
-    const response = await fetch('/netlify/functions/get-${tabla}');
+    const response = await fetch('/netlify/functions/get-${tabla}.js');
     if (!response.ok) throw new Error("Error cargando ${tabla}");
     return await response.json();
   } catch (error) {
@@ -87,7 +87,7 @@ async function guardarMovimiento(e) {
   };
 
   try {
-    const response = await fetch("/netlify/functions/add-movimiento", {
+    const response = await fetch("/netlify/functions/add-movimiento.js", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(movimiento)
