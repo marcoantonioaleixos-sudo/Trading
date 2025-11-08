@@ -1,14 +1,14 @@
 {
 	"geolocation": {
 		"data": {
-			"city": "London",
+			"city": "Spain",
 			"country": {
-				"code": "GB",
-				"name": "United Kingdom"
+				"code": "SP",
+				"name": "Spain"
 			},
 			"subdivision": {
-				"code": "ENG",
-				"name": "England"
+				"code": "SPA",
+				"name": "España"
 			},
 			"timezone": "Europe/London",
 			"latitude": 51.5081,
