@@ -53,7 +53,7 @@ async function cargarSelects() {
   activos.forEach(a => {
     const option = document.createElement("option");
     option.value = a.ticker;
-    option.textContent = '${a.ticker} (${a.nombre})';
+    option.textContent = '${a.ticker})';
     selectActivo.appendChild(option);
   });
 }
