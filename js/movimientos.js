@@ -4,7 +4,7 @@
 
 async function fetchData(tabla) {
   try {
-    const response = await fetch('/netlify/functions/get-${tabla.js}');
+    const response = await fetch('/.netlify/functions/get-${tabla}');
     if (!response.ok) throw new Error("Error cargando ${tabla}");
     return await response.json();
   } catch (error) {
