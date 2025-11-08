@@ -2,15 +2,17 @@
 
 // --- Cargar datos de Neon ---
 
-async function fetchData {
+async function fetchData ($tabla){
   try {
-    const response = await fetch("/.netlify/functions/get-Config_Bancos.js");
-    const response = await fetch("/.netlify/functions/get-Config_FormasPago.js");
-    const response = await fetch("/.netlify/functions/get-Criptos.js");
+    const response = 
+    await fetch("/.netlify/functions/get-Config_Bancos.js")
+    await fetch("/.netlify/functions/get-Config_FormasPago.js")
+    await fetch("/.netlify/functions/get-Criptos.js");
+
     if (!response.ok) throw new Error("Error cargando tabla");
     return await response.json();
   } catch (error) {
-    console.error("Error cargando tabla:", error);
+    console.error("Error cargando ($tabla):", error);
     return [];
   }
 }

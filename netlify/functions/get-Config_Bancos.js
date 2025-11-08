@@ -6,7 +6,7 @@ const sql = neon();
 
 export async function handler() {
   try {
-    const rows = await sql`SELECT id, nombre FROM "Config_Bancos" ORDER BY nombre`;
+    const rows = await sql`SELECT nombre FROM "Config_Bancos" ORDER BY nombre`;
     return {
       statusCode: 200,
       body: JSON.stringify(rows),
