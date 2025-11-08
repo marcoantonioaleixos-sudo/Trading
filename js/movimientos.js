@@ -4,10 +4,7 @@
 
 async function fetchData ($tabla){
   try {
-    const response = 
-    await fetch("/.netlify/functions/get-Config_Bancos.js")
-    await fetch("/.netlify/functions/get-Config_FormasPago.js")
-    await fetch("/.netlify/functions/get-Criptos.js");
+    const response =  await fetch("/.netlify/functions/get-[($tabla)]")
 
     if (!response.ok) throw new Error("Error cargando tabla");
     return await response.json();
