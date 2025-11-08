@@ -1,3 +1,71 @@
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #0d1117;
+  color: #e6edf3;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 480px;
+  margin: 40px auto;
+  background: #161b22;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.4);
+}
+
+h2 {
+  color: #3b82f6;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+button {
+  width: 100%;
+  margin-top: 20px;
+  padding: 12px;
+  background-color: #2563eb;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+button:hover {
+  background-color: #1d4ed8;
+}
+
+footer {
+  text-align: center;
+  font-size: 0.8rem;
+  color: #6b7280;
+  margin-top: 20px;
+}
+
+/* Mensaje flotante de éxito */
+.success-msg {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #2ecc71;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 10px;
+  font-weight: bold;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  opacity: 0;
+  animation: fadeIn 0.4s forwards;
+  z-index: 9999;
+}
+
+.success-msg.fade-out {
+  animation: fadeOut 0.5s forwards;
+}
+
 .form-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -28,6 +96,28 @@
   background-color: #f9f9f9;
 }
 
+form label {
+  display: block;
+  margin-top: 12px;
+  color: #9ca3af;
+  font-size: 0.9rem;
+}
+
+form input, form select, form textarea {
+  width: 100%;
+  padding: 10px;
+  margin-top: 4px;
+  background: #0d1117;
+  color: #fff;
+  border: 1px solid #3b82f6;
+  border-radius: 8px;
+  font-size: 0.95rem;
+}
+
+form textarea {
+  resize: vertical;
+}
+
 .full-width {
   grid-column: 1 / -1;
 }
@@ -55,3 +145,9 @@
   background-color: #f44336;
   color: white;
 }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(20px);  }
+   }
+   
