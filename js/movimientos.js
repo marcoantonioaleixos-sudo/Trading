@@ -92,7 +92,7 @@ bancos.forEach(banco => {
     option.textContent = '${a.ticker})';
     selectActivo.appendChild(option);
   });
-}
+
 
 
 // --- Establecer fecha actual ---
