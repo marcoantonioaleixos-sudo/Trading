@@ -10,9 +10,9 @@ async function cargarSelects() {
 
     // Selects del DOM
 
-    const selBanco = document.getElementById("selBanco");
-    const selFormaPago = document.getElementById("selFormaPago");
-    const selCripto = document.getElementById("selCripto");
+    const selBanco = document.getElementById("selbanco");
+    const selFormaPago = document.getElementById("selformaPago");
+    const selCripto = document.getElementById("selcripto");
 
     // Limpia y carga opciones
 
