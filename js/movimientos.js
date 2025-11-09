@@ -27,7 +27,7 @@ async function cargarSelects() {
     };
 
     rellenarSelect(selBancos, data.bancos, "nombre");
-    rellenarSelect(selFormasPago, data.formasPagos, "medio");
+    rellenarSelect(selFormasPago, data.formasPago, "medio");
     rellenarSelect(selCriptos, data.criptos, "ticker",);
 
     console.log("✅ Selects cargados correctamente");
