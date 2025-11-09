@@ -1,6 +1,6 @@
 // ADD MOVIMIENTOS
 
-import { neon } from "@netlify/neon";
+import { neon } from "@neondatabase/serverless";
 
 const sql = neon();
 

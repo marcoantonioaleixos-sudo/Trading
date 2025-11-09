@@ -16,12 +16,12 @@ var __copyProps = (to, from, except, desc) => {
 };
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 
-// netlify/functions/get-Config.js
-var get_Config_exports = {};
-__export(get_Config_exports, {
+// netlify/functions/get-config.js
+var get_config_exports = {};
+__export(get_config_exports, {
   handler: () => handler
 });
-module.exports = __toCommonJS(get_Config_exports);
+module.exports = __toCommonJS(get_config_exports);
 
 // node_modules/@neondatabase/serverless/index.mjs
 var So = Object.create;
@@ -5257,7 +5257,7 @@ var export_escapeIdentifier = ct.escapeIdentifier;
 var export_escapeLiteral = ct.escapeLiteral;
 var export_types = ct.types;
 
-// netlify/functions/get-Config.js
+// netlify/functions/get-config.js
 async function handler() {
   try {
     console.log("\u{1F539} Iniciando conexi\xF3n con Neon...");
@@ -5306,4 +5306,4 @@ async function handler() {
      *)
   *)
 */
-//# sourceMappingURL=get-Config.js.map
+//# sourceMappingURL=get-config.js.map

@@ -32,11 +32,11 @@ async function cargarSelects() {
     if (!res.ok) throw new Error('Error cargando configuración');
 
     const data = await res.json();
-    // Esperamos que data tenga: { bancos: [...], criptos: [...], formasPago: [...] }
+    // Esperamos que data tenga: { bancos: [...], criptos: [...], formaspago: [...] }
     // Rellenamos selects:
     rellenarSelect(selOrigen,  data.bancos,    'nombre', 'nombre');   // value/text -> nombre
-    rellenarSelect(selDestino, data.bancos,    'nombre', 'nombre');   // mismo banco -> destino
-    rellenarSelect(selMedio,   data.formasPago,'medio',  'medio');     // value/text -> medio
+    rellenarSelect(selDestino, data.bancos,    'nombre', 'nombre');   // mismo bancos -> destino
+    rellenarSelect(selMedio,   data.formaspago,'medio',  'medio');     // value/text -> medio
     rellenarSelect(selActivo,  data.criptos,   'ticker', 'ticker');   // value/text -> ticker
 
     console.log('✅ Selects cargados correctamente');
@@ -67,15 +67,15 @@ function rellenarSelect(select, lista = [], valueKey = 'value', textKey = 'label
   });
 }
 
-bancos.forEach(banco => {
+bancos.forEach(bancos => {
     const optionO = document.createElement("option");
-    optionO.value = banco.nombre;
-    optionO.textContent = banco.nombre;
+    optionO.value = bancos.nombre;
+    optionO.textContent = bancos.nombre;
     selectOrigen.appendChild(optionO);
 
     const optionD = document.createElement("option");
-    optionD.value = banco.nombre;
-    optionD.textContent = banco.nombre;
+    optionD.value = bancos.nombre;
+    optionD.textContent = bancos.nombre;
     selectDestino.appendChild(optionD);
   });
 
