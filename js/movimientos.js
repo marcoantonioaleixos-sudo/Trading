@@ -67,34 +67,6 @@ function rellenarSelect(select, lista = [], valueKey = 'value', textKey = 'label
   });
 }
 
-bancos.forEach(bancos => {
-    const optionO = document.createElement("option");
-    optionO.value = bancos.nombre;
-    optionO.textContent = bancos.nombre;
-    selectOrigen.appendChild(optionO);
-
-    const optionD = document.createElement("option");
-    optionD.value = bancos.nombre;
-    optionD.textContent = bancos.nombre;
-    selectDestino.appendChild(optionD);
-  });
-
-  medios.forEach(m => {
-    const option = document.createElement("option");
-    option.value = m.tipo;
-    option.textContent = m.tipo;
-    selectMedio.appendChild(option);
-  });
-
-  activos.forEach(a => {
-    const option = document.createElement("option");
-    option.value = a.ticker;
-    option.textContent = '${a.ticker})';
-    selectActivo.appendChild(option);
-  });
-
-
-
 // --- Establecer fecha actual ---
 async function fetchData ($tabla){
   try {
