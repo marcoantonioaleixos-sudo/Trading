@@ -12,12 +12,19 @@ async function cargarSelects() {
     const selMedio    = document.getElementById('medio');
     const selActivo   = document.getElementById('activo');
 
+    console.log("Selects cargados:");
+    console.log("Origen:", selOrigen);
+    console.log("Destino:", selDestino);
+    console.log("Medio:", selMedio);
+    console.log("Activo:", selActivo);
+
     // Verificar que existan los elementos
 
     if (!selOrigen || !selDestino || !selMedio || !selActivo) {
       console.error('❌ No se encontraron uno o varios selects en el HTML');
       return;
     }
+
 
     // Llamada al endpoint que devuelve la configuración unificada
 
