@@ -10,9 +10,10 @@ async function cargarSelects() {
 
     // Selects del DOM
 
-    const selBancos = document.getElementById("selbancos");
-    const selFormasPago = document.getElementById("selformasPago");
-    const selCriptos = document.getElementById("selcriptos");
+    const selBancos = document.getElementById("selOrigen");
+    const selBancos = document.getElementById("selDestino");
+    const selFormaspago = document.getElementById("selMedio");
+    const selCriptos = document.getElementById("selActivo");
 
     // Limpia y carga opciones
 
@@ -24,11 +25,12 @@ async function cargarSelects() {
         opt.textContent = item[textKey];
         select.appendChild(opt);
       });
-    };
+    }; 
 
-    rellenarSelect(selBancos, data.bancos, "nombre");
-    rellenarSelect(selFormasPago, data.formasPago, "medio");
-    rellenarSelect(selCriptos, data.criptos, "ticker",);
+    rellenarSelect(selOrigen, data.bancos, "id", "nombre");
+    rellenarSelect(selDestino, data.bancos, "id", "nombre");
+    rellenarSelect(selMedio, data.formasPago, "id", "medio");
+    rellenarSelect(selActivo, data.criptos, "id", "ticker",);
 
     console.log("✅ Selects cargados correctamente");
   } catch (error) {

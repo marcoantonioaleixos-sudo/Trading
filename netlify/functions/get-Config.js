@@ -13,7 +13,7 @@ export async function handler() {
 
     const [bancos, formasPago, criptos] = await Promise.all([
       db`SELECT nombre FROM bancos`,
-      db`SELECT tipo FROM formasPago`,
+      db`SELECT medio FROM formaspago`,
       db`SELECT ticker FROM criptos`
     ]);
 

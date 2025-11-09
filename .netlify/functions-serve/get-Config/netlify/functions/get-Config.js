@@ -5265,7 +5265,7 @@ async function handler() {
     console.log("\u{1F539} URL:", process.env.NETLIFY_DATABASE_URL);
     const [bancos, formasPago, criptos] = await Promise.all([
       db`SELECT nombre FROM bancos`,
-      db`SELECT tipo FROM formasPago`,
+      db`SELECT medio FROM formaspago`,
       db`SELECT ticker FROM criptos`
     ]);
     console.log("\u2705 Datos cargados correctamente");
