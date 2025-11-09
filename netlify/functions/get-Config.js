@@ -2,6 +2,7 @@
 
 // /netlify/functions/get-Config.js
 import { neon } from "@neondatabase/serverless";
+import { neon } from "@netlify/neon";
 
 export async function handler() {
   try {
