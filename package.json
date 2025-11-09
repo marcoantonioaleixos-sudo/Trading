@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "App de gestión de banca y trading conectada a Neon y Netlify Functions",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "start": "netlify dev",
     "build": "netlify build",

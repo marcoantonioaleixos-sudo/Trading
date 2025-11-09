@@ -1,21 +1,3 @@
 {
-	"geolocation": {
-		"data": {
-			"city": "London",
-			"country": {
-				"code": "GB",
-				"name": "United Kingdom"
-			},
-			"subdivision": {
-				"code": "ENG",
-				"name": "England"
-			},
-			"timezone": "Europe/London",
-			"latitude": 51.5081,
-			"longitude": -0.1278,
-			"postalCode": "EC1N"
-		},
-		"timestamp": 1762695247491
-	},
 	"siteId": "5ab2e77d-99db-45f1-9950-ddddd6b61191"
 }
