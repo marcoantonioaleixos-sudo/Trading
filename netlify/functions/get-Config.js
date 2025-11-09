@@ -1,9 +1,9 @@
 // /netlify/functions/get-Config.js
 
 // LLAMADA NEON  Config_TABLAS
+ //  import { neon } from "@netlify/neon";
 
 import { neon } from "@neondatabase/serverless";
- //  import { neon } from "@netlify/neon";
 
 export async function handler() {
   try {    
