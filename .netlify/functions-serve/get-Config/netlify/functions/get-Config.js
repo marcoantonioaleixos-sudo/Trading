@@ -5266,7 +5266,7 @@ async function handler() {
     const [bancos, formasPago, criptos] = await Promise.all([
       db`SELECT nombre FROM bancos`,
       db`SELECT tipo FROM formasPago`,
-      db`SELECT ticker FROM cripto`
+      db`SELECT ticker FROM criptos`
     ]);
     console.log("\u2705 Datos cargados correctamente");
     return {
