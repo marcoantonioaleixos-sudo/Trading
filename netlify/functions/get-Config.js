@@ -2,37 +2,32 @@
 
 // LLAMADA NEON  Config_TABLAS
 
-import { neon } from "@neondatabase/serverless";
-
-export async function handler(event, context) {
+export async function handler() {
   try {
+    console.log("🔹 Iniciando conexión con Neon...");
     const db = neon(process.env.NETLIFY_DATABASE_URL);
-
-    // Ejecutamos las tres consultas en paralelo
+    console.log("🔹 URL:", process.env.NETLIFY_DATABASE_URL);
 
     const [bancos, formasPago, criptos] = await Promise.all([
-      db`SELECT nombre FROM Bancos`,
-      db`SELECT tipo FROM FormasPago`,
-      db`SELECT ticker FROM Criptos`
+      db`SELECT nombre FROM bancos`,
+      db`SELECT tipo FROM formasPago`,
+      db`SELECT ticker FROM cripto`
     ]);
 
-    // Devolvemos todo junto
-    
+    console.log("✅ Datos cargados correctamente");
+
     return {
       statusCode: 200,
-      body: JSON.stringify({
-        bancos,
-        formasPago,
-        criptos
-      })
+      body: JSON.stringify({ bancos, formasPago, criptos })
     };
   } catch (error) {
-    console.error("❌ Error en get-Config:", error);
+    console.error("❌ Error detallado en get-Config:", error);
     return {
       statusCode: 500,
       body: JSON.stringify({
         error: "Error al obtener configuración",
-        detalle: error.message
+        detalle: error.message,
+        stack: error.stack
       })
     };
   }
