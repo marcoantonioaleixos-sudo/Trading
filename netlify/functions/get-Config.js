@@ -2,8 +2,10 @@
 
 // LLAMADA NEON  Config_TABLAS
 
+import { neon } from "@neondatabase/serverless";
+
 export async function handler() {
-  try {
+  try {    
     console.log("🔹 Iniciando conexión con Neon...");
     const db = neon(process.env.NETLIFY_DATABASE_URL);
     console.log("🔹 URL:", process.env.NETLIFY_DATABASE_URL);
