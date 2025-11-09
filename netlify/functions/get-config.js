@@ -1,4 +1,4 @@
-// /netlify/functions/get-Config.js
+// /netlify/functions/get-config.js
 
 // LLAMADA NEON  Config_TABLAS
  //  import { neon } from "@netlify/neon";
@@ -24,7 +24,7 @@ export async function handler() {
       body: JSON.stringify({ bancos, formasPago, criptos })
     };
   } catch (error) {
-    console.error("❌ Error detallado en get-Config:", error);
+    console.error("❌ Error detallado en get-config:", error);
     return {
       statusCode: 500,
       body: JSON.stringify({

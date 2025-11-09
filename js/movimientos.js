@@ -28,7 +28,7 @@ async function cargarSelects() {
 
     // Llamada al endpoint que devuelve la configuración unificada
 
-    const res = await fetch('/netlify/functions/get-Config'); // ajusta ruta si hace falta
+    const res = await fetch('/netlify/functions/get-config'); // ajusta ruta si hace falta
     if (!res.ok) throw new Error('Error cargando configuración');
 
     const data = await res.json();
@@ -70,7 +70,7 @@ function rellenarSelect(select, lista = [], valueKey = 'value', textKey = 'label
 // --- Establecer fecha actual ---
 async function fetchData ($tabla){
   try {
-    const response =  await fetch("/,netlify/functions/get-Config");
+    const response =  await fetch("/,netlify/functions/get-config");
 
     if (!response.ok) throw new Error("Error cargando tabla");
     return await response.json();
