@@ -16,13 +16,13 @@ const PORT = 8888;
 
 // 🟢 Simular endpoint Netlify: /netlify/functions/get-config
 app.all("/.netlify/functions/get-config", async (req, res) => {
-  const { handler } = await import(./netlify/functions/get-config.js);
+    const { handler } = await import('./netlify/functions/get-config.js');
   return handler(req, res);
 });
 
 // 🟢 Simular endpoint Netlify: /netlify/functions/add-movimientos
 app.all("/.netlify/functions/add-movimientos", async (req, res) => {
-  const { handler } = await import(./netlify/functions/add-movimientos.js);
+  const { handler } = await import('/netlify/functions/add-movimientos.js');
   return handler(req, res);
 });
 
@@ -33,5 +33,5 @@ app.get("/", (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(✅ Servidor local corriendo en http://localhost:${PORT});
+  console.log(' ✅ Servidor local corriendo en http://localhost:${PORT}');
 });
