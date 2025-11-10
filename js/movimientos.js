@@ -32,7 +32,7 @@ async function cargarSelects() {
      const res = await fetch("http://localhost.8888/.netlify/functions/add-movimientos", {
       method: "POST",
       headers: { "Content_Type": "application/json" },
-      body: JSON.stringify(datosMovimiento)
+      body: JSON.stringify(movimiento)
      }); 
      if (!res.ok) throw new Error('Error cargando configuración');
 
