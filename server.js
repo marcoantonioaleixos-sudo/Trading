@@ -1,22 +1,31 @@
 import express from "express";
-import path from "path";
-import { fileURLToPath } from "url";
+import bodyParser from "body-parser";
+import { neon } from "@neondatabase/serverless";
 
 const app = express();
-const port = 3000;
+const sql = neon(process.env.NETLIFY_DATABASE_URL);
 
-// Necesario para rutas absolutas correctas
-const __filename = fileURLToPath(import.meta.url);
-const _dirname = path.dirname(_filename);
+app.use(bodyParser.json());
 
-// Servir archivos estáticos (html, css, js, etc.)
-app.use(express.static(path.join(__dirname, "public")));
+// Ruta que simula tu función Netlify
+app.post("/.netlify/functions/add-movimientos", async (req, res) => {
+  try {
+    const { origen, medio, destino, cantidad, activo, valorUSDC } = req.body;
 
-// Si no encuentra un archivo, devolver index.html
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "index.html"));
+    console.log("📥 Datos recibidos:", req.body);
+
+    const result = await sql`
+      INSERT INTO "Movimientos" (origen, medio, destino, cantidad, activo, valorUSDC, fecha)
+      VALUES (${origen}, ${medio}, ${destino}, ${cantidad}, ${activo}, ${valorUSDC}, NOW())
+      RETURNING *;
+    `;
+
+    console.log("✅ Movimiento insertado:", result[0]);
+    res.status(200).json(result[0]);
+  } catch (error) {
+    console.error("❌ Error en add-movimientos:", error);
+    res.status(500).json({ error: error.message });
+  }
 });
 
-app.listen(port, () => {
-  console.log("Servidor funcionando en http://localhost:${port}");
-});
+app.listen(8888, () => console.log("🚀 Servidor local en http://localhost:8888"))

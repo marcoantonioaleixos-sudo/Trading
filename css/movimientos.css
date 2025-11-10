@@ -94,7 +94,6 @@ footer {
   border-radius: 0.5rem;
   font-size: 1rem;
   background-color: #000000;
-  flex: 150px;  /* tamaño celdas */
 }
 
 form label {

@@ -7,11 +7,11 @@ const sql = neon(process.env.NETLIFY_DATABASE_URL);
 export async function handler(event) {
   try {
     const data = JSON.parse(event.body);
-    const { origen, medio, destino, cantidad, activo } = data;
+    const { origen, medio, destino, cantidad, activo, valorUSDC } = data;
 
     const result = await sql`
-      INSERT INTO "Movimientos" (origen, medio, destino, cantidad, activo, fecha)
-      VALUES (${origen}, ${medio}, ${destino}, ${cantidad}, ${activo}, NOW())
+      INSERT INTO "Movimientos" (origen, medio, destino, cantidad, activo, fecha, valorUSDC)
+      VALUES (${origen}, ${medio}, ${destino}, ${cantidad}, ${activo}, ${valorUSDC}, NOW())
       RETURNING *;
     `;
 
