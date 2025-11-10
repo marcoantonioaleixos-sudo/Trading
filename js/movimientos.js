@@ -1,7 +1,5 @@
 // movimientos.js
 
-import { response } from "express";
-
 // Esperar a que el DOM esté cargado
 
 document.addEventListener('DOMContentLoaded', cargarSelects);
