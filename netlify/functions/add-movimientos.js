@@ -2,16 +2,16 @@
 
 import { neon } from "@neondatabase/serverless";
 
-const sql = neon(process.env.NETLIFY_DATABASE_URL);
+const sql = neon(process.env.DATABASE_URL);
 
-export async function handler(req, res) {
+export async function handler(event) {
   try {
     const data = JSON.parse(event.body);
-    const { origen, medio, destino, cantidad, activo, valorUSDC } = data;
+    const { origen, medio, destino, cantidad, activo } = data;
 
     const result = await sql`
-      INSERT INTO "Movimientos" (origen, medio, destino, cantidad, activo, fecha, valorUSDC)
-      VALUES (${origen}, ${medio}, ${destino}, ${cantidad}, ${activo}, ${valorUSDC}, NOW())
+      INSERT INTO "Movimientos" (origen, medio, destino, cantidad, activo, fecha)
+      VALUES (${origen}, ${medio}, ${destino}, ${cantidad}, ${activo}, NOW())
       RETURNING *;
     `;
 

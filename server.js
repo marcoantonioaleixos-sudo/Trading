@@ -1,37 +1,22 @@
-
-// server.js
 import express from "express";
-import cors from "cors";
-import dotenv from "dotenv";
-import fs from "fs";
 import path from "path";
-
-dotenv.config();
+import { fileURLToPath } from "url";
 
 const app = express();
-app.use(cors());
-app.use(express.json());
+const port = 3000;
 
-const PORT = process.env.PORT || 3000;
+// Necesario para rutas absolutas correctas
+const __filename = fileURLToPath(import.meta.url);
+const _dirname = path.dirname(_filename);
 
-// 🟢 Simular endpoint Netlify: /netlify/functions/get-config
-app.all("/.netlify/functions/get-config", async (req, res) => {
-    const { handler } = await import('./netlify/functions/get-config.js');
-  return handler(req, res);
+// Servir archivos estáticos (html, css, js, etc.)
+app.use(express.static(path.join(__dirname, "public")));
+
+// Si no encuentra un archivo, devolver index.html
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
-// 🟢 Simular endpoint Netlify: /netlify/functions/add-movimientos
-app.all("/.netlify/functions/add-movimientos", async (req, res) => {
-  const { handler } = await import('/netlify/functions/add-movimientos.js');
-  return handler(req, res);
-});
-
-// 🟢 Servir tu index.html
-app.get("/", (req, res) => {
-  const filePath = path.resolve("./index.html");
-  res.sendFile(filePath);
-});
-
-app.listen(PORT, () => {
-  console.log(' ✅ Servidor local corriendo en http://localhost:${PORT}');
+app.listen(port, () => {
+  console.log("Servidor funcionando en http://localhost:${port}");
 });
