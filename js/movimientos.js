@@ -28,15 +28,6 @@ async function cargarSelects() {
 
     // Llamada al endpoint que devuelve la configuración unificada
 
-     
-     const res = await fetch("http://localhost.8888/.netlify/functions/add-movimientos", {
-      method: "POST",
-      headers: { "Content_Type": "application/json" },
-      body: JSON.stringify(movimiento)
-     }); 
-     if (!res.ok) throw new Error('Error cargando configuración');
-
-
     const data = await res.json();
     // Esperamos que data tenga: { bancos: [...], criptos: [...], formaspago: [...] }
     // Rellenamos selects:
