@@ -1,5 +1,7 @@
 // movimientos.js
 
+import { response } from "express";
+
 // Esperar a que el DOM esté cargado
 
 document.addEventListener('DOMContentLoaded', cargarSelects);
@@ -28,7 +30,7 @@ async function cargarSelects() {
 
     // Llamada al endpoint que devuelve la configuración unificada
 
-    const data = await res.json();
+    const data = await response.json();
     // Esperamos que data tenga: { bancos: [...], criptos: [...], formaspago: [...] }
     // Rellenamos selects:
     rellenarSelect(selOrigen,  data.bancos,    'nombre', 'nombre');   // value/text -> nombre
