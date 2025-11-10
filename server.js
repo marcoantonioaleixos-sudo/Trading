@@ -12,8 +12,12 @@ const sql = neon(process.env.DATABASE_URL);
 
 app.use(bodyParser.json());
 
+app.get('/', (req, res) => {
+  res.send('servidor conectado');
+});
+
 // Ruta que simula tu función Netlify
-app.post("/.netlify/functions/add-movimientos", async (req, res) => {
+  app.post("/.netlify/functions/add-movimientos", async (req, res) => {
   try {
     const { origen, medio, destino, cantidad, activo, valorUSDC } = req.body;
 
@@ -31,6 +35,9 @@ app.post("/.netlify/functions/add-movimientos", async (req, res) => {
     console.error("❌ Error en add-movimientos:", error);
     res.status(500).json({ error: error.message });
   }
-});
+}); 
 
-app.listen(8888, () => console.log("🚀 Servidor local en http://localhost:8888"))
+app.listen(8888, () => 
+  console.log("🚀 Servidor local en
+     http://localhost:8888"
+  ));
