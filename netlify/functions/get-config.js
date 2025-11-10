@@ -11,7 +11,7 @@ export async function handler() {
     const db = neon(process.env.NETLIFY_DATABASE_URL);
     console.log("🔹 URL:", process.env.NETLIFY_DATABASE_URL);
 
-    const [bancos, formasPago, criptos] = await Promise.all([
+    const [bancos, formaspago, criptos] = await Promise.all([
       db`SELECT nombre FROM bancos`,
       db`SELECT medio FROM formaspago`,
       db`SELECT ticker FROM criptos`
@@ -21,7 +21,7 @@ export async function handler() {
 
     return {
       statusCode: 200,
-      body: JSON.stringify({ bancos, formasPago, criptos })
+      body: JSON.stringify({ bancos, formaspago, criptos })
     };
   } catch (error) {
     console.error("❌ Error detallado en get-config:", error);
