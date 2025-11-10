@@ -1,42 +1,37 @@
+
+// server.js
 import express from "express";
-import bodyParser from "body-parser";
-import 'dotenv/config';
-import { neon } from "@neondatabase/serverless";
+import cors from "cors";
+import dotenv from "dotenv";
+import fs from "fs";
+import path from "path";
 
-console.log('DB URL;',
-  process.env.DATABASE_URL? 'OK' : 'MISSING');
-
+dotenv.config();
 
 const app = express();
-const sql = neon(process.env.DATABASE_URL);
+app.use(cors());
+app.use(express.json());
 
-app.use(bodyParser.json());
+const PORT = 8888;
 
-app.get('/', (req, res) => {
-  res.send('servidor conectado');
+// 🟢 Simular endpoint Netlify: /netlify/functions/get-config
+app.all("/.netlify/functions/get-config", async (req, res) => {
+  const { handler } = await import(./netlify/functions/get-config.js);
+  return handler(req, res);
 });
 
-// Ruta que simula tu función Netlify
-  app.post("/.netlify/functions/add-movimientos", async (req, res) => {
-  try {
-    const { origen, medio, destino, cantidad, activo, valorUSDC } = req.body;
+// 🟢 Simular endpoint Netlify: /netlify/functions/add-movimientos
+app.all("/.netlify/functions/add-movimientos", async (req, res) => {
+  const { handler } = await import(./netlify/functions/add-movimientos.js);
+  return handler(req, res);
+});
 
-    console.log("📥 Datos recibidos:", req.body);
+// 🟢 Servir tu index.html
+app.get("/", (req, res) => {
+  const filePath = path.resolve("./index.html");
+  res.sendFile(filePath);
+});
 
-    const result = await sql`
-      INSERT INTO "Movimientos" (origen, medio, destino, cantidad, activo, valorUSDC, fecha)
-      VALUES (${origen}, ${medio}, ${destino}, ${cantidad}, ${activo}, ${valorUSDC}, NOW())
-      RETURNING *;
-    `;
-
-    console.log("✅ Movimiento insertado:", result[0]);
-    res.status(200).json(result[0]);
-  } catch (error) {
-    console.error("❌ Error en add-movimientos:", error);
-    res.status(500).json({ error: error.message });
-  }
-}); 
-
-app.listen(8888, () => 
-  console.log("🚀 Servidor local en http://localhost:8888"
-  ));
+app.listen(PORT, () => {
+  console.log(✅ Servidor local corriendo en http://localhost:${PORT});
+});

@@ -51,7 +51,7 @@ async function cargarSelects() {
 // CONFIGURAR EL FORMULARIO PARA ENVIAR EL MOVIMIENTO
 // =============================
 function configurarFormulario() {
-  const form = document.getElementById('formMovimiento');
+  const form = document.getElementById('formMovimientos');
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();

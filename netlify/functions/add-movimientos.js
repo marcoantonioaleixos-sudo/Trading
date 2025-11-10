@@ -4,7 +4,7 @@ import { neon } from "@neondatabase/serverless";
 
 const sql = neon(process.env.NETLIFY_DATABASE_URL);
 
-export async function handler(event) {
+export async function handler(req, res) {
   try {
     const data = JSON.parse(event.body);
     const { origen, medio, destino, cantidad, activo, valorUSDC } = data;
