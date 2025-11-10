@@ -12,7 +12,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const PORT = 8888;
+const PORT = process.env.PORT || 3000;
 
 // 🟢 Simular endpoint Netlify: /netlify/functions/get-config
 app.all("/.netlify/functions/get-config", async (req, res) => {
