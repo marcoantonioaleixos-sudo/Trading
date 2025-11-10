@@ -1,6 +1,11 @@
 import express from "express";
 import bodyParser from "body-parser";
+import 'dotenv/config';
 import { neon } from "@neondatabase/serverless";
+
+console.log('DB URL;',
+  process.env.DATABASE_URL? 'OK' : 'MISSING');
+
 
 const app = express();
 const sql = neon(process.env.NETLIFY_DATABASE_URL);
