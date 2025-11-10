@@ -5258,7 +5258,7 @@ var export_escapeLiteral = ct.escapeLiteral;
 var export_types = ct.types;
 
 // netlify/functions/add-movimientos.js
-var sql = cs();
+var sql = cs(process.env.NETLIFY_DATABASE_URL);
 async function handler(event) {
   try {
     const data = JSON.parse(event.body);

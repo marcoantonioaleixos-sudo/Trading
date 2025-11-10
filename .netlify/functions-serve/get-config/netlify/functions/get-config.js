@@ -5263,7 +5263,7 @@ async function handler() {
     console.log("\u{1F539} Iniciando conexi\xF3n con Neon...");
     const db = cs(process.env.NETLIFY_DATABASE_URL);
     console.log("\u{1F539} URL:", process.env.NETLIFY_DATABASE_URL);
-    const [bancos, formasPago, criptos] = await Promise.all([
+    const [bancos, formaspago, criptos] = await Promise.all([
       db`SELECT nombre FROM bancos`,
       db`SELECT medio FROM formaspago`,
       db`SELECT ticker FROM criptos`
@@ -5271,10 +5271,10 @@ async function handler() {
     console.log("\u2705 Datos cargados correctamente");
     return {
       statusCode: 200,
-      body: JSON.stringify({ bancos, formasPago, criptos })
+      body: JSON.stringify({ bancos, formaspago, criptos })
     };
   } catch (error) {
-    console.error("\u274C Error detallado en get-Config:", error);
+    console.error("\u274C Error detallado en get-config:", error);
     return {
       statusCode: 500,
       body: JSON.stringify({

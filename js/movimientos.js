@@ -94,6 +94,15 @@ function setTodayDate() {
 async function guardarMovimiento(e) {
   e.preventDefault();
 
+  const cantidadInput =
+  document.getElementById("cantidad").value;
+  const cantidad = parseFloat(cantidadInput); // limpia ceros
+
+  const valorUSDCInput =
+  document.getElementById("valorUSDC").value;
+  const valorUSDC = parseFloat(valorUSDCInput); // limpia ceros
+
+
   const movimiento = {
     fecha: document.getElementById("fecha").value,
     origen: document.getElementById("origen").value,
@@ -101,7 +110,7 @@ async function guardarMovimiento(e) {
     destino: document.getElementById("destino").value,
     cantidad: document.getElementById("cantidad").value,
     activo: document.getElementById("activo").value,
-    valor_usdc: document.getElementById("valorUSDC").value,
+    valorUSDC: document.getElementById("valorUSDC").value,
     notas: document.getElementById("notas").value
   };
 
@@ -171,3 +180,4 @@ document.addEventListener("DOMContentLoaded", () => {
   const btnCancelar = document.getElementById("cancelarMovimiento");
   if (btnCancelar) btnCancelar.addEventListener("click", cancelarMovimiento);
 });
+
