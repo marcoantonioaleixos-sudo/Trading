@@ -38,6 +38,5 @@ app.get('/', (req, res) => {
 }); 
 
 app.listen(8888, () => 
-  console.log("🚀 Servidor local en
-     http://localhost:8888"
+  console.log("🚀 Servidor local en http://localhost:8888"
   ));
