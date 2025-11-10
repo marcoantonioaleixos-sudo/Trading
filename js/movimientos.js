@@ -16,7 +16,7 @@ async function cargarSelects() {
     console.log("Origen:", selOrigen);
     console.log("Destino:", selDestino);
     console.log("Medio:", selMedio);
-    console.log("Activo:", selActivo);
+    console.log("Activo:", selActivo);
 
     // Verificar que existan los elementos
 
@@ -36,7 +36,7 @@ async function cargarSelects() {
     // Rellenamos selects:
     rellenarSelect(selOrigen,  data.bancos,    'nombre', 'nombre');   // value/text -> nombre
     rellenarSelect(selDestino, data.bancos,    'nombre', 'nombre');   // mismo bancos -> destino
-    rellenarSelect(selMedio,   data.formaspago,'medio',  'medio');     // value/text -> medio
+    rellenarSelect(selMedio,   data.formaspago, 'medio',  'medio');     // value/text -> medio
     rellenarSelect(selActivo,  data.criptos,   'ticker', 'ticker');   // value/text -> ticker
 
     console.log('✅ Selects cargados correctamente');
